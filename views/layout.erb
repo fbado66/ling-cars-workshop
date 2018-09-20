@@ -1,0 +1,46 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>LING PAGE</title>
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+ 
+    <button class="button-primary"><a href="/"><div class="navigation">Home</div></a></button>
+    <button class="button-primary"><a href="/users"><div class="navigation">Users</div></a></button>
+
+    <% if session[:user_id] %>
+    <button class="button-primary"><a href="/logout"><div class="navigation">Logout</div></a></button>
+      <%# dont do this shit %>
+      <%= User.find(session[:user_id]).username %> is logged in
+    <% else %>
+        <button class="button-primary"><a href="/signup"><div class="navigation">Signup</div></a></button>
+        <button class="button-primary"><a href="/signin"><div class="navigation">Signin</div></a></button>
+    <% end %>
+  
+
+  <% if flash[:info] %>
+    <div id="flash-info">
+      <%= flash[:info] %>
+    </div>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div id="flash-error">
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+  <%= yield %>
+
+
+</body>
+</html>
